@@ -1,0 +1,29 @@
+.header-title{
+    font-size: 70px;
+}
+.gender-filter-container{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.form-check-shop{
+    margin: 10px;
+    justify-content: end;
+}
+
+.form-check-label, .form-check-input{
+    font-size: 20px;
+    padding-left: 5px;
+}
+
+.product-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 25px;
+}
+
+.card-text{
+    color: black;
+}
