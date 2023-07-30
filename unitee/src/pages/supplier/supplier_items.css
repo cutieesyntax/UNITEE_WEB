@@ -1,0 +1,44 @@
+.supplier-header{
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 50px;
+}
+
+p{
+    font-size: 50px;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.menu-button-container{
+    display: flex;
+    background: linear-gradient(#65A4F6 , #013E8D);
+    width: 325px;
+    height: 325px;
+    border-style: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    flex-flow: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.menu-link{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 80px;
+}
+
+.menu-text{
+    margin: 20px;
+    font-size: 20px;
+}
+
+.iconSupplier{
+    width: 20px;
+    height: 20px;
+
+}

@@ -60,7 +60,7 @@ function Register() {Register
                                 </label>
                             </div>
                         </div>
-                        <Link className='col-md-6 link' to='/main' style={{ padding: '0px' }}>
+                        <Link className='col-md-6 link' to='/supplier_items' style={{ padding: '0px' }}>
                             <button className="col-md-12 btn btn-primary button">REGISTER</button>
                         </Link>
                     </div>
