@@ -28,9 +28,18 @@ function Register() {Register
                         </div>
                         <div className='col-md-6'>
                             <select className="form-select select">
-                                <option value="1">Computer Studies</option>
-                                <option value="2">Nursing</option>
-                                <option value="3">Criminology</option>
+                            <option value="1">Senior High School</option>
+                            <option value="2">Elementary and Junior High School</option>
+                            <option value="3">Criminology</option>
+                            <option value="4">Nursing</option>
+                            <option value="5">Allied Engineering</option>
+                            <option value="6">Customs Management</option>
+                            <option value="7">Computer Studies</option>
+                            <option value="8">Marine Transportation</option>
+                            <option value="9">Teacher Education</option>
+                            <option value="10">Marine Engineering</option>
+                            <option value="11">Computer Studies</option>
+                            <option value="12">Hotel and Tourism Management</option>
                             </select>
                         </div>
                         <div className='col-md-6'>

@@ -5,36 +5,43 @@ function Shop() {
     return <div className='container shop-contianer row'>
         <div className='col content-container'>
         <div className='row g-3' style={{ justifyContent: 'center' }}>
-            <h1 className='col-md-12 header-title' style={{ fontWeight:'normal' }}>AVAILABLE ITEMS</h1>           
-            <h4>Sort by:</h4>
+            <p className='shop-title'>AVAILABLE ITEMS</p>           
+            <h4 className='col-md-9'>Sort by:</h4>
+            <div></div>
             <div className='col-md-4 department-select'>
             <select className="form-select select">
-                <option value="1">Computer Studies</option>
-                <option value="2">Nursing</option>
+                <option value="1">Senior High School</option>
+                <option value="2">Elementary and Junior High School</option>
                 <option value="3">Criminology</option>
-                <option value="4">Senior High School</option>
+                <option value="4">Nursing</option>
+                <option value="5">Allied Engineering</option>
+                <option value="6">Customs Management</option>
+                <option value="7">Computer Studies</option>
+                <option value="8">Marine Transportation</option>
+                <option value="9">Teacher Education</option>
+                <option value="10">Marine Engineering</option>
+                <option value="11">Computer Studies</option>
+                <option value="12">Hotel and Tourism Management</option>
+                
+                
             </select>
             </div>
 
             <div className='col-md-5 gender-filter-container' style={{ justifyContent:'center', alignItems:'center', flexFlow:'row', display:'flex'}}>
             <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
-                <div className='col-md-3'>
                 <div className="form-check-shop">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                     <label className="form-check-label">
                         Male
                     </label>
                 </div>
-                </div>
-                <div className='col-md-3'>
+
                 <div className="form-check-shop">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
                     <label className="form-check-label">
                         Female
                     </label>
-                </div>
-                </div>
-                
+                </div>               
                 <div className='col-md-3'>
                 <div className="form-check-shop">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked/>
@@ -44,7 +51,7 @@ function Shop() {
                 </div>
                 </div>
                 </div>
-                <div className='col-md-12' style={{ marginTop:'50px', marginLeft:'275px'}}>
+                <div className='col-md-12' style={{ marginTop:'50px', marginLeft:'320px'}}>
                     <div className='col-md-5'>
                     <input className="form-control input" placeholder="Search" />
                     </div>                

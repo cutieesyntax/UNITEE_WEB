@@ -1,5 +1,9 @@
-.header-title{
-    font-size: 70px;
+.shop-title{
+    font-size: 45px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
 }
 .gender-filter-container{
     justify-content: center;
