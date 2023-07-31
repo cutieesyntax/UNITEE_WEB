@@ -6,6 +6,7 @@ import NotFound from './pages/common/not-found'
 import Main from './pages/main/main'
 import Home from './pages/main/home'
 import Shop from './pages/main/shop'
+import Supplier from './pages/supplier/supplier_items'
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
         <Route path='/main' element={ <Main/> }>
           <Route index element={ <Home/> }/>
           <Route path='shop' element={ <Shop/> }/>
+          <Route path='/main' element={ <Main/> }></Route>  
         </Route>
+        <Route path='supplier_items' element={ <Supplier/> }></Route>
         <Route path='*' element={ <NotFound/> }/>
       </Routes>
     </Router>

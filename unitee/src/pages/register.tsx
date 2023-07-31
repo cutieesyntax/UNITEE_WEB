@@ -27,7 +27,7 @@ function Register() {Register
                             <input className="form-control input" type='password' placeholder="Password"/>
                         </div>
                         <div className='col-md-6'>
-                            <select className="form-select select">
+                            <select className="form-select select" style={{ backgroundColor:'transparent', color:'white' }}>
                             <option value="1">Senior High School</option>
                             <option value="2">Elementary and Junior High School</option>
                             <option value="3">Criminology</option>
@@ -60,7 +60,7 @@ function Register() {Register
                                 </label>
                             </div>
                         </div>
-                        <Link className='col-md-6 link' to='/main' style={{ padding: '0px' }}>
+                        <Link className='col-md-6 link' to='/supplier_items' style={{ padding: '0px' }}>
                             <button className="col-md-12 btn btn-primary button">REGISTER</button>
                         </Link>
                     </div>

@@ -17,17 +17,18 @@
 }
 
 .form-check-label, .form-check-input{
-    font-size: 20px;
-    padding-left: 5px;
+    font-size: 18px;
+    padding-left: 9px;
 }
 
 .product-container{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     padding: 25px;
+    margin-left: 85px;
 }
 
 .card-text{
     color: black;
+    font-size: medium;
 }
