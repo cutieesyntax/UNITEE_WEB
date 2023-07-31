@@ -70,7 +70,7 @@ function Supplier (){
             <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
             <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
             <div className='col-md-4 department-select'>
-            <select className="form-select select" style={{ backgroundColor:'transparent', color:'white' }}>
+            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
                 <option value="1">Senior High School</option>
                 <option value="2">Elementary and Junior High School</option>
                 <option value="3">Criminology</option>
