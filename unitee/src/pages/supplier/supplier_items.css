@@ -1,3 +1,10 @@
+.items-title{
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+}
 .supplier-header{
     margin-left: 30px;
     align-items: center;
@@ -59,6 +66,16 @@ p{
     padding-left: 80px;
 }
 
+.upload-featured-item{
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px;
+}
+
 .featured-title{
     font-size: 20px;
     padding-left: 80px;
@@ -68,9 +85,30 @@ p{
 .add-item-btn{
     border-style: solid;
     border-radius: 25px;
+    border-color: white;
     font-size: 15px;
     background-color: transparent;
     padding: 10px;
     font-weight: 600;
     margin-right: 130px;
+}
+
+.featured-{
+    background-color: #65A4F6;
+    position: absolute;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card-title-supplier{
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.size-available, .prod-gender, .prod-department, .prod-type, .prod-stock{
+    font-size: 20px;
+    font-weight: 300;
 }

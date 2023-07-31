@@ -52,8 +52,14 @@ function Supplier (){
                 
                 <div className="col-md-7">
                 <span className="featured-title">Featured Item</span>
-                    <img src={ featured_item } className="featured-img"/>
+                    <div>                                   
+                    <img src={ featured_item } className="featured-img"/>      
                 </div>
+                <div className="col-md-7 upload-featured-item">
+                <button type="button" className="btn btn-outline-warning" style={{ fontSize:'20px' }}>Upload Image</button>                    
+                    </div>
+                    </div>
+                
                 
             </div>
             
@@ -61,7 +67,7 @@ function Supplier (){
             <div className='container shop-contianer'>
         <div className='col content-container'>
         <div className='row g-3' style={{ justifyContent: 'center' }}>
-            <p className='shop-title' style={{ marginTop:'150px' }}>AVAILABLE ITEMS</p>           
+            <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
             <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
             <div className='col-md-4 department-select'>
             <select className="form-select select" style={{ backgroundColor:'transparent', color:'white' }}>
@@ -114,101 +120,67 @@ function Supplier (){
                     
                     </div>                
                 </div>
-                
-                <div className='col-md-12 product-container'>
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
+  
+<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
+  <div className="row g-0">
+    <div className="col-md-4">
+      <img src={ product } className="img-fluid rounded-start" alt="..."/>
+    </div>
+    <div className="col-md-8">
+      <div className="card-body">
+        <span className="card-title-supplier">PRODUCT NAME</span>
+        <p className="size-available">Sizes available: </p>
+        <p className="prod-gender">Gender: </p>
+        <p className="prod-department">Department: </p>
+        <p className="prod-type">Product type: </p>
+        <p className="prod-stock">Stocks available: </p>
+        <span></span>
+        <p className="prod-price">Price: </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
+<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
+  <div className="row g-0">
+    <div className="col-md-4">
+      <img src={ product } className="img-fluid rounded-start" alt="..."/>
+    </div>
+    <div className="col-md-8">
+      <div className="card-body">
+        <span className="card-title-supplier">PRODUCT NAME</span>
+        <p className="size-available">Sizes available: </p>
+        <p className="prod-gender">Gender: </p>
+        <p className="prod-department">Department: </p>
+        <p className="prod-type">Product type: </p>
+        <p className="prod-stock">Stocks available: </p>
+        <span></span>
+        <p className="prod-price">Price: </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <div className='col-md-12 product-container'>
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-
-            <div className='col-md-12 product-container'>
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='col-md-3'>
-                        <div className="card" style={{width:'230px'}}>
-                            <img src={ product }/>
-                            <div className="card-body">
-                                <h5 className="card-title">Product Name</h5>
-                                <p className="card-text">$999.00</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>                      
+<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
+  <div className="row g-0">
+    <div className="col-md-4">
+      <img src={ product } className="img-fluid rounded-start" alt="..."/>
+    </div>
+    <div className="col-md-8">
+      <div className="card-body">
+        <span className="card-title-supplier">PRODUCT NAME</span>
+        <p className="size-available">Sizes available: </p>
+        <p className="prod-gender">Gender: </p>
+        <p className="prod-department">Department: </p>
+        <p className="prod-type">Product type: </p>
+        <p className="prod-stock">Stocks available: </p>
+        <span></span>
+        <p className="prod-price">Price: </p>
+      </div>
+    </div>
+  </div>
+</div>
+            
             </div>
             
                 
