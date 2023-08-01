@@ -89,7 +89,7 @@ function Supplier (){
             <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
             <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
                 <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>
                     <label className="form-check-label">
                         Male
                     </label>
@@ -101,7 +101,6 @@ function Supplier (){
                         Female
                     </label>
                 </div>               
-                <div className='col-md-3'>
                 <div className="form-check-shop">
                     <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked/>
                     <label className="form-check-label">
@@ -109,58 +108,21 @@ function Supplier (){
                     </label>
                 </div>
                 </div>
-                </div>
                 
                 <div className='col-md-12' style={{ marginTop:'50px',justifyContent:'center',display:'flex',alignItems:'center'}}>
                     <div>
-                    <button className="add-item-btn">Add Item</button>
+                      <Link to='/add_item'>
+                        <button className="add-item-btn">Add Item</button>
+                      </Link>
                     </div>
                     <div className='col-md-6'>
                     <input className="form-control input" placeholder="Search" />
                     
                     </div>                
                 </div>
-  
-<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
-  <div className="row g-0">
-    <div className="col-md-4">
-      <img src={ product } className="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <span className="card-title-supplier">PRODUCT NAME</span>
-        <p className="size-available">Sizes available: </p>
-        <p className="prod-gender">Gender: </p>
-        <p className="prod-department">Department: </p>
-        <p className="prod-type">Product type: </p>
-        <p className="prod-stock">Stocks available: </p>
-        <span></span>
-        <p className="prod-price">Price: </p>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
-  <div className="row g-0">
-    <div className="col-md-4">
-      <img src={ product } className="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <span className="card-title-supplier">PRODUCT NAME</span>
-        <p className="size-available">Sizes available: </p>
-        <p className="prod-gender">Gender: </p>
-        <p className="prod-department">Department: </p>
-        <p className="prod-type">Product type: </p>
-        <p className="prod-stock">Stocks available: </p>
-        <span></span>
-        <p className="prod-price">Price: </p>
-      </div>
-    </div>
-  </div>
-</div>
 
+<Link to="/update_item" style={{ display:'flex', justifyContent:'center', textDecoration:'none' }}>
 <div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
   <div className="row g-0">
     <div className="col-md-4">
@@ -180,6 +142,7 @@ function Supplier (){
     </div>
   </div>
 </div>
+</Link>
             
             </div>
             

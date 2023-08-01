@@ -27,7 +27,7 @@ function Shop() {
         <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
         <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
             <div className="form-check-shop">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Male"/>
+                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Male" checked/>
                 <label className="form-check-label">
                     Male
                 </label>
@@ -157,6 +157,7 @@ function Shop() {
 
         
 </div>
+
 }
 
 export default Shop
