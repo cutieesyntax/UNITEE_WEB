@@ -10,6 +10,7 @@ function Register() {Register
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
+    const [departments, setDepartments] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [gender, setGender] = useState('');
@@ -29,6 +30,10 @@ function Register() {Register
 
     const handlePassword = (value) => {
         setPassword(value);
+    }
+
+    const handleDepartment = (value) => {
+        setDepartments(value);
     }
 
     const handEmail = (value) => {
@@ -52,7 +57,8 @@ function Register() {Register
             "customer_Password": password,
             "customer_Email": email,
             "customer_PhoneNum": phoneNumber,
-            "customer_Gender": gender
+            "customer_Gender": gender,
+            "DepartmentID": departments
         };
 
         const url = "https://localhost:7080/Customer/register";
@@ -96,7 +102,7 @@ function Register() {Register
                             <input className="form-control input" type='password' placeholder="Password" onChange={(e) => handlePassword(e.target.value)} />
                         </div>
                         <div className='col-md-6' >
-                            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
+                            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }} onChange={(e) => handleDepartment(e.target.value)}>
                             <option value="1">Senior High School</option>
                             <option value="2">Elementary and Junior High School</option>
                             <option value="3">Criminology</option>
