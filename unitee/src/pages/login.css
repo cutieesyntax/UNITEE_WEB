@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
 .main {
     /* background-image: url('../assets/images/common/login_bg.png'); */
-    background: linear-gradient(#00215E, #2668E1);
+    background: #00171F;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
     min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
 .main-container {
