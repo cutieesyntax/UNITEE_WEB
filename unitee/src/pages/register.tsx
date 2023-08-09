@@ -1,21 +1,30 @@
 import './register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
-function Register() {Register
+function Register() {
+
+    interface Department {
+        departmentId: number;
+        department_Name: string;
+    }
 
     const [IDNumber, setIDNumber] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [gender, setGender] = useState('');
+    const [departments, setDepartments] = useState<Department[]>([]);
+    const [departmentId, setSelectedDepartment] = useState('');
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
-    const handleIDNumber = (value) => {
+    const handleIDnumber = (value) => {
         setIDNumber(value);
     }
 
@@ -27,11 +36,7 @@ function Register() {Register
         setLastName(value);
     }
 
-    const handlePassword = (value) => {
-        setPassword(value);
-    }
-
-    const handEmail = (value) => {
+    const handleEmail = (value) => {
         setEmail(value);
     }
 
@@ -39,99 +44,127 @@ function Register() {Register
         setPhoneNumber(value);
     }
 
+    const handlePassword = (value) => {
+        setPassword(value);
+    }
+
+    const handleConfirmPassword = (value) => {
+        setConfirmPassword(value);
+    }
+
     const handleGender = (value) => {
         setGender(value);
     }
 
-
-    const handleSave = () => {
-        const data = {
-            "customer_Id": IDNumber,
-            "customer_FirstName": firstName,
-            "customer_LastName": lastName,
-            "customer_Password": password,
-            "customer_Email": email,
-            "customer_PhoneNum": phoneNumber,
-            "customer_Gender": gender
-        };
-
-        const url = "https://localhost:7080/Customer/register";
-        axios.post(url, data).then((result) => {
-            if (result.status === 200) {
-                if(result.data) {
-                    alert('Successfully Registered');
-                    navigate('/', { state: { customerData: result.data } });
-                } else {
-                    alert(result.data); 
-                }
-            } else {
-                alert('Network error or server not responding');
-            }
-        }).catch((error) => {
-            alert(error);
-        })
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
     }
 
+    //Read All Departments
+    useEffect(() => {
+        axios.get('https://localhost:7017/Department')
+            .then(res => {
+                setDepartments(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
+    //Register Account
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        
+        //Confirm Password
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append('Id', IDNumber);
+        formData.append('DepartmentId', departmentId);
+        formData.append('FirstName', firstName);
+        formData.append('LastName', lastName);
+        formData.append('Email', email);
+        formData.append('PhoneNumber', phoneNumber);
+        formData.append('Password', password);
+        formData.append('Gender', gender);
+        formData.append('Image', image);
+
+        try {
+            const response = await axios.post('https://localhost:7017/Users/register', formData);
+            if (response.data) {
+                alert('Successfully registered.');
+                navigate('/');
+            } else {
+                alert(response.data); 
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
+        <form onSubmit={handleSubmit}>
             <div className='container main-container row'>
                 <div className="col content-container">
                     <div className='row g-3' style={{ justifyContent: 'center' }}>
                         <h3 className='col-md-12 header-title'>Register</h3>
                         <div className='col-md-6'>
-                            <input className="form-control input" placeholder="ID Number" onChange={(e) => handleIDNumber(e.target.value)} />
+                            <input className="form-control input" placeholder="ID Number" onChange={(e) => handleIDnumber(e.target.value)} required/>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" type='email' placeholder="First Name" onChange={(e) => handleFirstName(e.target.value)} />
+                            <input className="form-control input" type='First Name' placeholder="First Name" onChange={(e) => handleFirstName(e.target.value)} required/>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" placeholder="Last Name" onChange={(e) => handleLastName(e.target.value)} />
+                            <input className="form-control input" placeholder="Last Name" onChange={(e) => handleLastName(e.target.value)} required/>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" placeholder="Email" onChange={(e) => handEmail(e.target.value)} />
+                            <input className="form-control input" placeholder="Email" onChange={(e) => handleEmail(e.target.value)} required/>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" placeholder="Phone Number" onChange={(e) => handlePhoneNumber(e.target.value)} />
+                            <input className="form-control input" placeholder="Phone Number" onChange={(e) => handlePhoneNumber(e.target.value)} required/>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" type='password' placeholder="Password" onChange={(e) => handlePassword(e.target.value)} />
+                            <input className="form-control input" type='password' placeholder="Password" onChange={(e) => handlePassword(e.target.value)} required/>
                         </div>
+                        
                         <div className='col-md-6' >
-                            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
-                            <option value="1">Senior High School</option>
-                            <option value="2">Elementary and Junior High School</option>
-                            <option value="3">Criminology</option>
-                            <option value="4">Nursing</option>
-                            <option value="5">Allied Engineering</option>
-                            <option value="6">Customs Management</option>
-                            <option value="7">Computer Studies</option>
-                            <option value="8">Marine Transportation</option>
-                            <option value="9">Teacher Education</option>
-                            <option value="10">Marine Engineering</option>
-                            <option value="11">Computer Studies</option>
-                            <option value="12">Hotel and Tourism Management</option>
+                            <select onChange={(e) => setSelectedDepartment(e.target.value)} value={departmentId} className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }} required>
+                            <option value="">Select Department</option>
+                                {departments.map((department, index) => (
+                                    <option key={index} value={department.departmentId}>
+                                        {department.department_Name}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className='col-md-6'>
-                            <input className="form-control input" type='password' placeholder="Confirm Password"/>
+                            <input className="form-control input" type='password' placeholder="Confirm Password" onChange={(e) => handleConfirmPassword(e.target.value)} required/>
+                        </div>
+                        <div className='col-md-6' style={{ marginLeft: '330px' }}>
+                            <input className="form-control input" type='file' onChange={handleImageChange} />
                         </div>
                         <div className='col-md-12' style={{ marginTop: '20px' }}>
                             <span>Gender:</span>
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Male" checked={gender === 'Male'} onChange={(e) => handleGender(e.target.value)} />
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Male" checked={gender === 'Male'} onChange={(e) => handleGender(e.target.value)} required/>
                                 <label className="form-check-label">
                                     Male
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Female" checked={gender === 'Female'} onChange={(e) => handleGender(e.target.value)} />
+                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Female" checked={gender === 'Female'} onChange={(e) => handleGender(e.target.value)} required/>
                                 <label className="form-check-label">
                                     Female
                                 </label>
                             </div>
+                            
                         </div>
-                        <Link className='col-md-6 link' to='/' style={{ padding: '0px' }}>
-                            <button className="col-md-12 btn btn-primary button" onClick={() => handleSave()}>REGISTER</button>
-                        </Link>
+                        <div className='col-md-6 link' style={{ padding: '0px' }}>
+                            <button className="col-md-12 btn btn-primary button" type="submit">REGISTER</button>
+                        </div>
                     </div>
                 </div>
                 <div className="col row g-3 content-container" style={{ marginTop: '-200px' }}>
@@ -143,8 +176,8 @@ function Register() {Register
                         <button className="col-md-12 btn btn-light button">LOGIN</button>
                     </Link>
                 </div>
-
             </div>
+        </form>
     )
 }
 

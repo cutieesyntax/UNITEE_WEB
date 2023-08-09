@@ -1,5 +1,5 @@
 import './supplier_items.css'
-import { Link } from "react-router-dom"
+import { Link, useParams  } from "react-router-dom"
 import logo from '../../assets/images/unitee.png'
 import sprofile from '../../assets/images/s-icon.png'
 import logoutSupplier from "../../assets/images/icons/logoutSupplier.png"
@@ -7,9 +7,64 @@ import items from "../../assets/images/icons/items.png"
 import orders from "../../assets/images/icons/orders.png"
 import reports from "../../assets/images/icons/reports.png"
 import featured_item from '../../assets/images/main/home_1.png'
-import product from "../../assets/images/shop_products/product.png"
+//import productImage from "../../assets/images/shop_products/product.png"
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function Supplier (){
+
+    interface ProductType {
+        productTypeId: number;
+        product_Type: string;
+    }
+
+    const [products, setProducts] = useState([]);
+    const [productTypes, setProductTypes] = useState<ProductType[]>([]);
+    const [productTypeId, setSelectedProductType] = useState('');
+    const { id } = useParams();
+    const [departments, setDepartments] = useState([]);
+
+
+    //Read All Departments
+    useEffect(() => {
+        axios.get('https://localhost:7017/Department')
+            .then(res => {
+                setDepartments(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
+    const getDepartmentName = (departmentId) => {
+        const department = departments.find(d => d.departmentId === departmentId);
+        return department ? department.department_Name : 'Unknown Department';
+    };
+
+    //Read All Product Types
+    useEffect(() => {
+        axios.get('https://localhost:7017/ProductType')
+            .then(res => {
+                setProductTypes(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
+    const getProductTypeName = (productTypeId) => {
+        const productType = productTypes.find(p => p.productTypeId === productTypeId);
+        return productType ? productType.product_Type : 'Unknown Type';
+    };
+
+    useEffect(() => {
+        axios.get(`https://localhost:7017/Product/bysupplier/${id}`)
+            .then(res => {
+                setProducts(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
     return (
         <div className="supplier-container">
             <header className="supplier-header row">
@@ -59,98 +114,88 @@ function Supplier (){
                 <button type="button" className="btn btn-outline-warning" style={{ fontSize:'20px' }}>Upload Image</button>                    
                     </div>
                     </div>
-                
-                
             </div>
             
 
             <div className='container shop-contianer'>
-        <div className='col content-container'>
-        <div className='row g-3' style={{ justifyContent: 'center' }}>
-            <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
-            <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
-            <div className='col-md-4 department-select'>
-            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
-                <option value="1">Senior High School</option>
-                <option value="2">Elementary and Junior High School</option>
-                <option value="3">Criminology</option>
-                <option value="4">Nursing</option>
-                <option value="5">Allied Engineering</option>
-                <option value="6">Customs Management</option>
-                <option value="7">Computer Studies</option>
-                <option value="8">Marine Transportation</option>
-                <option value="9">Teacher Education</option>
-                <option value="10">Marine Engineering</option>
-                <option value="11">Computer Studies</option>
-                <option value="12">Hotel and Tourism Management</option>                
-            </select>
-            </div>
-
-            <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
-            <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>
-                    <label className="form-check-label">
-                        Male
-                    </label>
-                </div>
-
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-                    <label className="form-check-label">
-                        Female
-                    </label>
-                </div>               
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked/>
-                    <label className="form-check-label">
-                        Unisex
-                    </label>
-                </div>
-                </div>
-                
-                <div className='col-md-12' style={{ marginTop:'50px',justifyContent:'center',display:'flex',alignItems:'center'}}>
-                    <div>
-                      <Link to='/add_item'>
-                        <button className="add-item-btn">Add Item</button>
-                      </Link>
+                <div className='col content-container'>
+                <div className='row g-3' style={{ justifyContent: 'center' }}>
+                    <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
+                    <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
+                    <div className='col-md-4 department-select'>
+                    <select onChange={(e) => setSelectedProductType (e.target.value)} value={productTypeId} className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
+                        <option value="">Select Product Type</option>
+                            {productTypes.map((product_types, index) => (
+                                <option key={index} value={product_types.productTypeId}>
+                                    {product_types.product_Type}
+                                </option>
+                            ))}              
+                    </select>
                     </div>
-                    <div className='col-md-6'>
-                    <input className="form-control input" placeholder="Search" />
                     
-                    </div>                
+
+                    <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
+                    <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
+                        <div className="form-check-shop">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" defaultChecked/>
+                            <label className="form-check-label">
+                                Male
+                            </label>
+                        </div>
+
+                        <div className="form-check-shop">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" defaultChecked/>
+                            <label className="form-check-label">
+                                Female
+                            </label>
+                        </div>               
+                        <div className="form-check-shop">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" defaultChecked/>
+                            <label className="form-check-label">
+                                Unisex
+                            </label>
+                        </div>
+                        </div>
+                        
+                        <div className='col-md-12' style={{ marginTop:'50px',justifyContent:'center',display:'flex',alignItems:'center'}}>
+                            <div>
+                            <Link to={`/add_item/${id}`}>
+                                <button className="add-item-btn">Add Item</button>
+                            </Link>
+                            </div>
+                            <div className='col-md-6'>
+                            <input className="form-control input" placeholder="Search" />
+                            
+                            </div>                
+                        </div>
+
+                        {products.map((product) => (
+                            <Link to={`/update_item/${id}/${product.productId}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
+                            <div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
+                            <div className="row g-0">
+                                <div className="col-md-4">
+                                <img src={`https://localhost:7017/${product.image}`} className="img-fluid rounded-start" alt="..."/>
+                                </div>
+                                <div className="col-md-8">
+                                <div className="card-body">
+                                    <span className="card-title-supplier">{product.productName}</span>
+                                    <p className="size-available">Sizes available: {product.sizes}</p>
+                                    <p className="prod-gender">Gender: {product.category}</p>
+                                    <p className="prod-department">Department: {getDepartmentName(product.departmentId)}</p>
+                                    <p className="prod-type">Product type: {getProductTypeName(product.productTypeId)}</p>
+                                    <p className="prod-stock">Stocks available: {product.stocks}</p>
+                                    <span></span>
+                                    <p className="prod-price">Price: {product.price}</p>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                            </Link>
+                        ))}
+                        
+                    </div> 
                 </div>
-
-
-<Link to="/update_item" style={{ display:'flex', justifyContent:'center', textDecoration:'none' }}>
-<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
-  <div className="row g-0">
-    <div className="col-md-4">
-      <img src={ product } className="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <span className="card-title-supplier">PRODUCT NAME</span>
-        <p className="size-available">Sizes available: </p>
-        <p className="prod-gender">Gender: </p>
-        <p className="prod-department">Department: </p>
-        <p className="prod-type">Product type: </p>
-        <p className="prod-stock">Stocks available: </p>
-        <span></span>
-        <p className="prod-price">Price: </p>
-      </div>
-    </div>
-  </div>
-</div>
-</Link>
-            
             </div>
-            
-                
-    </div>
-
-            
-</div>
         </div>
 
     )

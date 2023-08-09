@@ -1,27 +1,41 @@
 import './shop.css'
 import product from "../../assets/images/shop_products/product.png"
+import axios from 'axios'
+import { useState, useEffect } from 'react';
 
 function Shop() {
+
+    interface ProductType {
+        productTypeId: number;
+        product_Type: string;
+    }
+
+    const [productTypes, setProductTypes] = useState<ProductType[]>([]);
+      const [productTypeId, setSelectedProductType] = useState('');
+
+    useEffect(() => {
+        axios.get('https://localhost:7017/ProductType')
+            .then(res => {
+              setProductTypes(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
     return <div className='container shop-contianer'>
     <div className='col content-container'>
     <div className='row g-3' style={{ justifyContent: 'center' }}>
         <p className='shop-title'>AVAILABLE ITEMS</p>           
         <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
-        <div className='col-md-4 department-select'>
-        <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
-            <option value="1">Senior High School</option>
-            <option value="2">Elementary and Junior High School</option>
-            <option value="3">Criminology</option>
-            <option value="4">Nursing</option>
-            <option value="5">Allied Engineering</option>
-            <option value="6">Customs Management</option>
-            <option value="7">Computer Studies</option>
-            <option value="8">Marine Transportation</option>
-            <option value="9">Teacher Education</option>
-            <option value="10">Marine Engineering</option>
-            <option value="11">Computer Studies</option>
-            <option value="12">Hotel and Tourism Management</option>                
-        </select>
+        <div className='col-md-4 product-select'>
+            <select onChange={(e) => setSelectedProductType (e.target.value)} value={productTypeId} style={{ backgroundColor:'#00215E', color:'white' }} required>
+                <option value="">Select Product Type</option>
+                    {productTypes.map((product_types, index) => (
+                        <option key={index} value={product_types.productTypeId}>
+                            {product_types.product_Type}
+                        </option>
+                    ))}
+            </select>
         </div>
 
         <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
