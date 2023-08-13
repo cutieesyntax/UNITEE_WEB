@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link, useParams, useNavigate } from "react-router-dom"
 import logo from "../../assets/images/unitee.png"
 import orders from "../../assets/images/icons/orders.png"
 import items from "../../assets/images/icons/items.png"
@@ -9,7 +9,7 @@ import customer from "../../assets/images/icons/profile.png"
 import suppliers from "../../assets/images/icons/suppliers.png"
 import admins from "../../assets/images/icons/admins.png"
 import profile from "../../assets/images/icons/profile2.png"
-import supplierProfile from "../../assets/images/imageprofile.jpeg"
+//import supplierProfile from "../../assets/images/imageprofile.jpeg"
 import './add_supplier.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -17,7 +17,25 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function Add_supplier(){
 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [Suppliers, setSuppliers] = useState([]);
+    const { id } = useParams();
+    const navigate = useNavigate();
 
+    // Search Suppliers
+    const filteredSuppliers = Suppliers.filter(supplier =>
+        supplier.id.toString().includes(searchTerm) ||
+        supplier.shopName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        supplier.phoneNumber.includes(searchTerm)
+    );
+    
+    // Get All Suppliers
+    useEffect(() => {
+        fetch('https://localhost:7017/Users/getSuppliers')
+            .then((response) => response.json())
+            .then((data) => setSuppliers(data));
+    }, []);
 
     return <div className="admin-container">
         <header className="supplier-header row">
@@ -30,10 +48,15 @@ function Add_supplier(){
             <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}>
             <div className='col-md-7' style={{ display:'flex', justifyContent:'space-between', marginLeft:'50px'}}>
                 <div className='col-md-6'>
-                    <input className="form-control input" placeholder="Search" /> 
+                    <input
+                        className="form-control input"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
                 </div>
 
-                <Link to='/supplier_details'>
+                <Link to={`/supplier_details/${id}`}>
                     <button className="add-supplier-btn">Add Supplier</button>
                 </Link>                
             </div>
@@ -95,51 +118,62 @@ function Add_supplier(){
                             </span>
                         </Link>
         </div>
-        <div className="col-md-9 supplier-container" style={{ paddingTop:'20px' }}>
-            <div className="col-md-3 suppliers-profile-container" style={{ backgroundColor:'white', height:'330px', borderStyle:'none', borderRadius:'20px' }}>
-                <div className="profile-pic-container" style={{ padding:'20px' }}>
-                    <img className="mx-auto d-block" src={ supplierProfile } style={{ height:'120px', width:'120px', borderStyle:'none', borderRadius:"50%" }}/>
+
+
+        <div className="col-md-9 supplier-container" style={{ paddingTop: '20px', display: 'flex', flexWrap: 'wrap' }}>
+            {filteredSuppliers.map((supplier) => (
+                <div className="col-md-3 suppliers-profile-container" key={supplier.id} style={{ backgroundColor: 'white', height: '330px', borderStyle: 'none', borderRadius: '20px' }}>
+                <div className="profile-pic-container" style={{ padding: '20px' }}>
+                    <img className="mx-auto d-block" src={`https://localhost:7017/${supplier.image}`} alt={supplier.shopName} style={{ height: '120px', width: '120px', borderStyle: 'none', borderRadius: '50%' }} />
                 </div>
-                <span className="supplier-details">Supplier ID:</span>
-                <span className="supplier-details">Shop</span>
-                <span className="supplier-details">Email</span>
-                <span className="supplier-details">Phone number</span>
-                <span className='supplier-details'><button id="offcanvasButton" className="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">View Profile</button></span>
-            </div>
-
-            </div>
-        </div>
-
-
-
-      <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title" id="offcanvasRightLabel">
-            Supplier Profile
-          </h5>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div className="offcanvas-body">
-        <div className="profile-pic-container" style={{ padding:'20px' }}>
-                    <img className="mx-auto d-block" src={ supplierProfile } style={{ height:'120px', width:'120px', borderStyle:'none', borderRadius:"50%" }}/>
-                </div>
-                <span className="supplier-ID">Supplier ID:</span>
-                <span className="supplier-Status">Status</span>
-                <span className="supplier-info">Shop</span>
-                <span className="supplier-info">Email</span>
-                <span className="supplier-info">Phone number</span>
-                <span className="supplier-info">
-                    <Link className='btn' to='/supplier_details'>
-                        <button className="update-supplier-btn">Edit Supplier</button>
-                </Link>
+                <span className="supplier-details">Supplier ID: {supplier.id}</span>
+                <span className="supplier-details">Shop: {supplier.shopName}</span>
+                <span className="supplier-details">Email: {supplier.email}</span>
+                <span className="supplier-details">Phone number: {supplier.phoneNumber}</span>
+                <span className="supplier-details">
+                    <button 
+                        id="offcanvasButton" 
+                        className="btn btn-primary" 
+                        type="button" 
+                        data-bs-toggle="offcanvas" 
+                        data-bs-target="#offcanvasRight" 
+                        aria-controls="offcanvasRight" 
+                        onClick={() => navigate(`/update_supplier/${supplier.id}`)}>
+                            
+                        View Profile
+                    </button>
                 </span>
+                
 
+
+                <div className="offcanvas offcanvas-end" tabIndex={-1} id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div className="offcanvas-header">
+                    <h5 className="offcanvas-title" id="offcanvasRightLabel">
+                        Supplier Profile
+                    </h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body">
+                    <div className="profile-pic-container" style={{ padding:'20px' }}>
+                                <img className="mx-auto d-block" src={`https://localhost:7017/${supplier.image}`} style={{ height:'120px', width:'120px', borderStyle:'none', borderRadius:"50%" }}/>
+                            </div>
+                                <span className="supplier-details">Supplier ID: {supplier.id}</span>
+                                <span className="supplier-details">Shop: {supplier.shopName}</span>
+                                <span className="supplier-details">Email: {supplier.email}</span>
+                                <span className="supplier-details">Phone number: {supplier.phoneNumber}</span>
+                                <span className="supplier-info">
+                                <Link className='btn' to={`/update_supplier/${supplier.id}`}>
+                                    <button className="update-supplier-btn">Edit Supplier</button>
+                                </Link>
+                            </span>
+                    </div>
+                </div>
+            </div>
+            ))}
         </div>
-      </div>
-
     </div>
+</div>
+
 }
 
 export default Add_supplier

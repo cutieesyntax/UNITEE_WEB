@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import product from "../../assets/images/shop_products/product.png"
 import logo from "../../assets/images/unitee.png"
 import { useEffect, useState, useRef } from 'react';
@@ -30,6 +30,7 @@ function Update_item(){
     const [productIsActive, setProductIsActive] = useState('');
     const { id, productId } = useParams();
     const inputRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
     
 
     //Read All Departments
@@ -89,31 +90,29 @@ function Update_item(){
                 setProductPrice(product.price);
                 setSelectedProductType(product.productTypeId);
                 setProductCategory(product.category);
-                setSelectedSizes(product.sizes.split(',')); // Convert comma-separated string to array of sizes
+                setSelectedSizes(product.sizes.split(',')); 
                 setProductQuantity(product.stocks);
                 setSelectedImage(product.image);
         
-                if (product.product_IsActive === true) {
+                if (product.isActive === true) {
                     const button = document.getElementById('btn_Deactivate');
-                    if (button) {
+                        button.textContent='Deactivate';
                         button.style.color = 'white';
                         button.style.backgroundColor = 'red';
                         button.style.borderColor = 'red';
-                    }
-                    setProductIsActive('false');
-                } else if (product.product_IsActive === false) {
+                        setProductIsActive('false');
+                } else if (product.isActive === false) {
                     const button = document.getElementById('btn_Deactivate');
-                    if (button) {
+                        button.textContent='Activate';
                         button.style.color = 'white';
                         button.style.backgroundColor = 'green';
                         button.style.borderColor = 'green';
-                    }
-                    setProductIsActive('true');
+                        setProductIsActive('true');
                 }
             })
         }, [productId])
 
-        // Update Product 
+        // Update Product
         const handleUpdateItem = () => {
             const formData = new FormData();
             formData.append('ProductTypeId', productTypeId);
@@ -148,6 +147,28 @@ function Update_item(){
                     alert('Network error or server not responding');
                 });
             };
+
+            // Deactivate/Activate Product
+            const handleDeactivateActivate = () => {
+                const isActive = productIsActive === 'true';
+                const url = `https://localhost:7017/Product/activate/${productId}`;
+                
+                axios.put(url, isActive, { headers: { 'Content-Type': 'application/json' }})
+                    .then((result) => {
+                        if (result.status >= 200 && result.status < 300) {
+                            console.log("Success");
+                            alert('Success');
+                            navigate(`/supplier_items/${id}`);
+                        } else {
+                            console.error(result.data.message);
+                            console.error("Error");
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Network error or server not responding', error);
+                    });
+            };
+            
 
         return <div className="container add_item_container">
             <header style={{ marginTop:'30px', display:'flex', alignItems:'center', gap:'45em' }}>
@@ -186,8 +207,7 @@ function Update_item(){
                     <textarea 
                         className="form-control" 
                         aria-label="Product description" 
-                        value={productDescription
-                            }
+                        value={productDescription}
                         onChange={(e) => setProductDescription(e.target.value)} required/>
                 </div>
 
@@ -231,7 +251,6 @@ function Update_item(){
                 <div className="size-container">
                     <p className="available-sizes">Sizes Available:</p>
                     <div className="item-sizes-container" style={{ display:'flex', marginLeft:'20px' }}>
-                        {/* Add checkboxes for each size */}
                         {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (
                             <div className="form-check-shop" key={size}>
                             <input
@@ -324,9 +343,8 @@ function Update_item(){
                 </div>
 
                 <div className="item-btns-container">
-                <button type="button" className="btn btn-lg btn-success" onClick={handleUpdateItem}>Add Item</button>
-                <button type="button" className="btn btn-lg btn-danger">Cancel</button>
-                    
+                <button type="button" className="btn btn-lg btn-warning" onClick={handleUpdateItem}>Update Item</button>
+                <button type="button" className="btn btn-lg btn-danger" id='btn_Deactivate' onClick={handleDeactivateActivate}></button>
                 </div>
 
             </div>

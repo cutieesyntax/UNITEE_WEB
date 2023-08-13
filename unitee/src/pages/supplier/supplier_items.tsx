@@ -8,7 +8,7 @@ import orders from "../../assets/images/icons/orders.png"
 import reports from "../../assets/images/icons/reports.png"
 import featured_item from '../../assets/images/main/home_1.png'
 //import productImage from "../../assets/images/shop_products/product.png"
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
 function Supplier (){
@@ -21,9 +21,14 @@ function Supplier (){
     const [products, setProducts] = useState([]);
     const [productTypes, setProductTypes] = useState<ProductType[]>([]);
     const [productTypeId, setSelectedProductType] = useState('');
-    const { id } = useParams();
+    const [searchTerm, setSearchTerm] = useState('');
     const [departments, setDepartments] = useState([]);
+    const [selectedGender, setSelectedGender] = useState('');
+    const { id } = useParams();
 
+    const maleRef = useRef(null);
+    const femaleRef = useRef(null);
+    const unisexRef = useRef(null);
 
     //Read All Departments
     useEffect(() => {
@@ -35,6 +40,7 @@ function Supplier (){
         });
     }, []);
 
+    // Get Department Names
     const getDepartmentName = (departmentId) => {
         const department = departments.find(d => d.departmentId === departmentId);
         return department ? department.department_Name : 'Unknown Department';
@@ -50,11 +56,38 @@ function Supplier (){
         });
     }, []);
 
+    // Get Product Type Name
     const getProductTypeName = (productTypeId) => {
         const productType = productTypes.find(p => p.productTypeId === productTypeId);
         return productType ? productType.product_Type : 'Unknown Type';
     };
 
+    // Filtered Products Details
+    const filteredProduct = products.filter(product =>
+        (productTypeId === '' || product.productTypeId.toString() === productTypeId) &&
+        (
+            selectedGender === '' ||
+            selectedGender === 'unisex' ||
+            product.category.toLowerCase() === selectedGender
+        ) &&
+        (
+            product.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.stocks.toString().includes(searchTerm) ||
+            product.price.toString().includes(searchTerm)
+        )
+    );
+
+    // toggle the radio buttons for gender
+    const handleGenderClick = (e, gender) => {
+        if (selectedGender === gender) {
+            setSelectedGender('');
+            e.target.checked = false;
+        } else {
+            setSelectedGender(gender);
+        }
+    };
+
+    // Read Product By Supplier ID
     useEffect(() => {
         axios.get(`https://localhost:7017/Product/bysupplier/${id}`)
             .then(res => {
@@ -63,10 +96,11 @@ function Supplier (){
             })
             .catch((err) => {console.error(err)
         });
-    }, []);
+    }, [id]);
+
 
     return (
-        <div className="supplier-container">
+        <div className="supplier-container row">
             <header className="supplier-header row">
                 <Link to='' className="col-md-3">
                     <img className="logo" src={ logo } style={{height:'60px', marginLeft:'50px'}}/>
@@ -121,36 +155,70 @@ function Supplier (){
                 <div className='col content-container'>
                 <div className='row g-3' style={{ justifyContent: 'center' }}>
                     <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
-                    <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
-                    <div className='col-md-4 department-select'>
-                    <select onChange={(e) => setSelectedProductType (e.target.value)} value={productTypeId} className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
-                        <option value="">Select Product Type</option>
-                            {productTypes.map((product_types, index) => (
-                                <option key={index} value={product_types.productTypeId}>
-                                    {product_types.product_Type}
-                                </option>
-                            ))}              
+                    <h4 className='col-md-2' style={{ paddingLeft:'180px', paddingTop:'10px'}}>Sort by:</h4>
+                    <div className='col-md-2'>
+                    <select
+                        onChange={(e) => setSelectedProductType(e.target.value)}
+                        value={productTypeId}
+                        className="form-select select"
+                        style={{ backgroundColor: '#00215E', color: 'white' }}
+                    >
+                        <option value="" disabled>
+                            Select Product Type
+                        </option>
+                        <option value="">All</option>
+                        {productTypes.map((product_types, index) => (
+                            <option key={index} value={product_types.productTypeId}>
+                                {product_types.product_Type}
+                            </option>
+                        ))}
                     </select>
                     </div>
                     
-
                     <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
                     <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
-                        <div className="form-check-shop">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" defaultChecked/>
+                        <div className="form-check-shop" style={{ paddingRight:'10px' }}>
+                            <input 
+                                className="form-check-input" 
+                                type="radio" 
+                                name="gender" 
+                                ref={maleRef} 
+                                id="male" 
+                                value="male" 
+                                defaultChecked={selectedGender === 'male'} 
+                                onClick={(e) => handleGenderClick(e, 'male')} 
+                            />
                             <label className="form-check-label">
                                 Male
                             </label>
                         </div>
 
-                        <div className="form-check-shop">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" defaultChecked/>
+                        <div className="form-check-shop" style={{ paddingRight:'10px' }}>
+                            <input 
+                                className="form-check-input" 
+                                type="radio" 
+                                name="gender" 
+                                ref={femaleRef} 
+                                id="female" 
+                                value="female" 
+                                defaultChecked={selectedGender === 'female'} 
+                                onClick={(e) => handleGenderClick(e, 'female')} 
+                            />
                             <label className="form-check-label">
                                 Female
                             </label>
                         </div>               
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" defaultChecked/>
+                            <input 
+                                className="form-check-input" 
+                                type="radio" 
+                                name="gender" 
+                                ref={unisexRef} 
+                                id="unisex" 
+                                value="unisex" 
+                                defaultChecked={selectedGender === 'unisex'} 
+                                onClick={(e) => handleGenderClick(e, 'unisex')} 
+                            />
                             <label className="form-check-label">
                                 Unisex
                             </label>
@@ -163,14 +231,18 @@ function Supplier (){
                                 <button className="add-item-btn">Add Item</button>
                             </Link>
                             </div>
-                            <div className='col-md-6'>
-                            <input className="form-control input" placeholder="Search" />
-                            
-                            </div>                
+                            <div className='col-md-3'>
+                                <input
+                                    className="form-control input"
+                                    placeholder="Search by product name..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>          
                         </div>
 
-                        {products.map((product) => (
-                            <Link to={`/update_item/${id}/${product.productId}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
+                        {filteredProduct.map((product) => (
+                            <Link key={product.productId} to={`/update_item/${id}/${product.productId}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
                             <div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
                             <div className="row g-0">
                                 <div className="col-md-4">

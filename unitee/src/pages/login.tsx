@@ -18,6 +18,7 @@ function Login() {
         setPassword(value);
     }
 
+    // Login Account
     const handleLogin = () => {
         setLoading(true); 
         const data = {
@@ -28,36 +29,41 @@ function Login() {
         const url = 'https://localhost:7017/Users/login';
         axios.post(url, data)
         .then((result) => {
-            setLoading(false);
             if (result.status === 200) {
                 alert('Successfully Logged In');
                 switch (result.data.role) {
                     case 'Customer':
-                    navigate(`/main/${result.data.user.id}`, { state: { userData: result.data.user } });
-                    break;
+                        navigate(`/main/${result.data.user.id}`, { state: { userData: result.data.user } });
+                        break;
                     case 'Supplier':
-                    navigate(`/supplier_items/${result.data.user.id}`, { state: { supplierData: result.data.user } });
-                    break;
+                        navigate(`/supplier_items/${result.data.user.id}`, { state: { supplierData: result.data.user } });
+                        break;
                     case 'Admin':
-                    navigate(`/add_supplier/${result.data.user.id}`, { state: { adminData: result.data.user } });
-                    break;
+                        navigate(`/add_supplier/${result.data.user.id}`, { state: { adminData: result.data.user } });
+                        break;
                     default:
-                    console.log('Unknown role');
-                    break;
+                        console.log('Unknown role');
+                        break;
                 }
-                } else {
-                    alert(result.data.message);
-                }
-            })
-            .catch(() => {
-                setLoading(false);
-                alert('Network error or server not responding');
-            });
-        }
+            } else {
+                alert(result.data.message);
+            }
+        })
+        .catch((error) => {
+            setLoading(false);
+            if (error.response && error.response.status === 400) {
+                alert('Account is deactivated.');
+            } else {
+                alert('Wrong Credentials');
+            }
+        });
+    }
+
 
     if (loading) {
         return <div className='row container main-container'>Loading...</div>;
     }
+
     
     return (
         <div className='row container main-container'>

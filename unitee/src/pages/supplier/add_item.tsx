@@ -1,7 +1,7 @@
 import './add_item.css'
 import product from "../../assets/images/shop_products/product.png"
 import logo from "../../assets/images/unitee.png"
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
@@ -30,6 +30,7 @@ function Add_item(){
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
     const { id } = useParams();
     const inputRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
 
         const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             setProductCategory(e.target.value);
@@ -99,9 +100,10 @@ function Add_item(){
             })
             .then((result) => {
                 if (result.status === 200) {
-                alert('Successfully Added An Item');
+                    alert('Successfully Added An Item');
+                    navigate(`/supplier_items/${id}`);
                 } else {
-                alert(result.data.message);
+                    alert(result.data.message);
                 }
             })
             .catch(() => {
@@ -260,7 +262,7 @@ function Add_item(){
 
             <div className="item-btns-container">
             <button type="button" className="btn btn-lg btn-success" onClick={handleAddItem}>Add Item</button>
-            <button type="button" className="btn btn-lg btn-danger">Deactivate</button>
+            <button type="button" className="btn btn-lg btn-danger" onClick={() => navigate(`/supplier_items/${id}`)}>Cancel</button>
                 
             </div>
 

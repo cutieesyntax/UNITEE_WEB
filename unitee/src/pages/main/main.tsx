@@ -9,6 +9,7 @@ import profile from "../../assets/images/icons/profile.png"
 import logout from "../../assets/images/icons/logout.png"
 
 function Main() {
+
     return <div className="main">
         <div className="container">
             <header className="header row">

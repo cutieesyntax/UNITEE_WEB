@@ -1,24 +1,11 @@
-.shop-title{
-    font-size: 45px;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-
-}
 .gender-filter-container{
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-.form-check-shop{
-    margin: 10px;
-    justify-content: end;
-}
-
 .form-check-label, .form-check-input{
     font-size: 18px;
-    padding-left: 9px;
 }
 
 .product-container{
@@ -31,4 +18,85 @@
 .card-text{
     color: black;
     font-size: medium;
+}
+
+.prod-name {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.prod-image {
+    width: 400px;
+    padding: 20px;
+}
+
+.product-details-container {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    margin-left: 20px;
+}
+.sizes {
+    margin-left: 20px;
+    font-size: 15px;
+}
+.sizeGuide-btn {
+    margin-left: 10px;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.shop-title1, .shop-title2 {
+    font-weight: 800;
+    font-size: 40px;
+}
+
+.shop-title1 {
+    color: #00A7E1;
+}
+
+
+.browse-image {
+    width: 300px;
+}
+
+.shop-title-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.sort-container {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.gender-container-shop {
+    display: flex;
+    flex-flow: row;
+    gap: 50px;
+}
+
+.shop-filter-container {
+    margin-bottom: 20px
+}
+
+.size-button {
+    background-color: #00215E;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px; 
+    margin: 5px; 
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.size-button.selected {
+    background-color: #00A7E1;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
 }
