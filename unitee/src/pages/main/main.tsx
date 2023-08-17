@@ -7,9 +7,24 @@ import shop from "../../assets/images/icons/shop.png"
 import notification from "../../assets/images/icons/notifications.png"
 import profile from "../../assets/images/icons/profile.png"
 import logout from "../../assets/images/icons/logout.png"
+import { useEffect, useState} from "react";
+import axios from "axios"
 
 function Main() {
 
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://localhost:7017/Cart')
+            .then(res => {
+                setCart(res.data);
+                console.log(res.data);
+            })
+            .catch((err) => {console.error(err)
+        });
+    }, []);
+
+    
     return <div className="main">
         <div className="container">
             <header className="header row">
@@ -20,8 +35,11 @@ function Main() {
                     <Link to='shop'>
                         <img className="header-img-button" src={ shop }/>
                     </Link>
-                    <Link to='shop'>
+                    <Link to='cart'>
                         <img className="header-img-button" src={ bag }/>
+                        {cart.length > 0 && (
+                            <span className="cart-badge">{cart.length}</span>
+                        )}
                     </Link>
                     <Link to='shop'>
                         <img className="header-img-button" src={ notification }/>

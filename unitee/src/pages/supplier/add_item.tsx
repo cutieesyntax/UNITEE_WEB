@@ -17,6 +17,16 @@ function Add_item(){
         product_Type: string;
     }
 
+    // type ValidationErrors = {
+    //     productName?: string;
+    //     description?: string;
+    //     price?: string;
+    //     category?: string;
+    //     productTypeId?: number;
+    //     departmentId?: number;
+
+    // }
+
     const [productName, setProductName] = useState('');
     const [productDescription, setProductDescription] = useState('');
     const [productPrice, setProductPrice] = useState('');
@@ -28,6 +38,7 @@ function Add_item(){
     const [departmentId, setSelectedDepartment] = useState('');
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    //const [validationErrors, setValidationErrors] = useState<ValidationErrors>({});
     const { id } = useParams();
     const inputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
@@ -78,6 +89,7 @@ function Add_item(){
 
     //Add Item
     const handleAddItem = () => {
+
         const formData = new FormData();
         formData.append('ProductTypeId', productTypeId);
         formData.append('DepartmentId', departmentId);
@@ -111,6 +123,12 @@ function Add_item(){
             });
         };
 
+        // Validation
+        // const validateForm = () => {
+        //     const errors: ValidationErrors = {};
+        //     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        //     if(!)
+        // }
 
     return <div className="container add_item_container">
         <header style={{ marginTop:'30px', display:'flex', alignItems:'center', gap:'45em' }}>

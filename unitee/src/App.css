@@ -1,9 +1,10 @@
 :root {
   --theme: #00215E;
+  font-family: 'Poppins', sans-serif;
 }
 
 * {
-  color: white;
+  /* color: white; */
   font-size: 12px;
 }
 
@@ -32,4 +33,8 @@
 
 span {
   color: white;
+}
+
+.custom-toast {
+  color: black; 
 }

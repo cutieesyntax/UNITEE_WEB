@@ -251,13 +251,13 @@ function Supplier (){
                                 <div className="col-md-8">
                                 <div className="card-body">
                                     <span className="card-title-supplier">{product.productName}</span>
-                                    <p className="size-available">Sizes available: {product.sizes}</p>
-                                    <p className="prod-gender">Gender: {product.category}</p>
-                                    <p className="prod-department">Department: {getDepartmentName(product.departmentId)}</p>
-                                    <p className="prod-type">Product type: {getProductTypeName(product.productTypeId)}</p>
-                                    <p className="prod-stock">Stocks available: {product.stocks}</p>
+                                    <p className="size-available" style={{ color: 'white' }}>Sizes available: {product.sizes}</p>
+                                    <p className="prod-gender" style={{ color: 'white' }}>Gender: {product.category}</p>
+                                    <p className="prod-department" style={{ color: 'white' }}>Department: {getDepartmentName(product.departmentId)}</p>
+                                    <p className="prod-type" style={{ color: 'white' }}>Product type: {getProductTypeName(product.productTypeId)}</p>
+                                    <p className="prod-stock" style={{ color: 'white' }}>Stocks available: {product.stocks}</p>
                                     <span></span>
-                                    <p className="prod-price">Price: {product.price}</p>
+                                    <p className="prod-price" style={{ color: 'white' }}>Price: {product.price}</p>
                                 </div>
                                 </div>
                             </div>

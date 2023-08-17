@@ -3,6 +3,7 @@ import product from "../../assets/images/shop_products/product.png"
 import logo from "../../assets/images/unitee.png"
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import '../supplier/update_item.css';
 
 function Update_item(){
 
@@ -250,7 +251,7 @@ function Update_item(){
 
                 <div className="size-container">
                     <p className="available-sizes">Sizes Available:</p>
-                    <div className="item-sizes-container" style={{ display:'flex', marginLeft:'20px' }}>
+                    <div className="item-sizes-container" style={{ display:'flex', marginLeft:'20px', color: 'white' }}>
                         {['XXS', 'XS', 'S', 'M', 'L', 'XL'].map((size) => (
                             <div className="form-check-shop" key={size}>
                             <input

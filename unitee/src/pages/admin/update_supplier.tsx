@@ -75,7 +75,7 @@ function Update_supplier() {
         })
         .then((result) => {
             if (result.status === 200) {
-                alert('Successfully Updated.');
+                alert('Successfully Updated A Supplier');
             } else {
                 alert(result.data.message);
                 alert("Error");
