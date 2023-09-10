@@ -24,6 +24,7 @@ function Supplier (){
     const [searchTerm, setSearchTerm] = useState('');
     const [departments, setDepartments] = useState([]);
     const [selectedGender, setSelectedGender] = useState('');
+    const [sizes, setSizes] = useState([]);
     const { id } = useParams();
 
     const maleRef = useRef(null);
@@ -94,10 +95,34 @@ function Supplier (){
                 setProducts(res.data);
                 console.log(res.data);
             })
-            .catch((err) => {console.error(err)
-        });
+            .catch((err) => {
+                console.error(err);
+            });
     }, [id]);
+    
+    // useEffect(() => {
+    //     if (products.length > 0) {
+    //         const fetchSizes = products.map(product => {
+    //             return axios.get(`https://localhost:7017/SizeQuantity/byproduct/${product.productId}`)
+    //                 .then(res => {
+    //                     product.sizes = res.data;
+    //                     return product;
+    //                 });
+    //         });
+    
+    //         Promise.all(fetchSizes)
+    //             .then(updatedProducts => {
+    //                 setProducts(updatedProducts);
+    //             })
+    //             .catch(err => {
+    //                 console.error(err);
+    //             });
+    //     }
+    // }, [products]);
 
+    
+    
+    
 
     return (
         <div className="supplier-container row">
@@ -241,7 +266,7 @@ function Supplier (){
                             </div>          
                         </div>
 
-                        {filteredProduct.map((product) => (
+                        {filteredProduct.map((product ) => (
                             <Link key={product.productId} to={`/update_item/${id}/${product.productId}`} style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
                             <div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
                             <div className="row g-0">
@@ -251,7 +276,11 @@ function Supplier (){
                                 <div className="col-md-8">
                                 <div className="card-body">
                                     <span className="card-title-supplier">{product.productName}</span>
-                                    <p className="size-available" style={{ color: 'white' }}>Sizes available: {product.sizes}</p>
+                                    <p className="size-available" style={{ color: 'white' }}>Sizes available: 
+                                        {product.sizes && product.sizes.map((size, index) => (
+                                            <span key={index}> {size.sizeName}</span> // Assuming the size object has an attribute "sizeName"
+                                        ))}
+                                    </p>
                                     <p className="prod-gender" style={{ color: 'white' }}>Gender: {product.category}</p>
                                     <p className="prod-department" style={{ color: 'white' }}>Department: {getDepartmentName(product.departmentId)}</p>
                                     <p className="prod-type" style={{ color: 'white' }}>Product type: {getProductTypeName(product.productTypeId)}</p>

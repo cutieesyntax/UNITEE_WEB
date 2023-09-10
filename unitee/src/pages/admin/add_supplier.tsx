@@ -46,7 +46,7 @@ function Add_supplier(){
             </header>
 
             <div className="col-md-12" style={{ display:'flex', justifyContent:'center' }}>
-            <div className='col-md-7' style={{ display:'flex', justifyContent:'space-between', marginLeft:'50px'}}>
+            <div className='col-md-8' style={{ display:'flex', justifyContent:'space-between', marginLeft:'130px', alignItems:'center'}}>
                 <div className='col-md-6'>
                     <input
                         className="form-control input"
@@ -55,10 +55,16 @@ function Add_supplier(){
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
-
+                <div className="customer-counter-container">
+            <span className="counter">No. of Suppliers: </span>
+            {Suppliers.length > 0 && (
+                <span className="counter">{Suppliers.length}</span>
+            )}
+        </div>
                 <Link to={`/supplier_details/${id}`}>
                     <button className="add-supplier-btn">Add Supplier</button>
-                </Link>                
+                </Link>
+                                
             </div>
             </div>
 
@@ -83,14 +89,14 @@ function Add_supplier(){
                                 Transactions
                             </span>
                         </Link>
-                    <Link to='*' className="menu-link">
+                    <Link to={`/add_customer/${id}`} className="menu-link">
                         <img className="iconSupplier" src={ customer }/>
                             <span className="menu-text">
                                 Customers
                             </span>
                     </Link>
 
-                    <Link to='/add_supplier' className="menu-link">
+                    <Link to={`/add_supplier/${id}`} className="menu-link">
                         <img className="iconSupplier" src={ suppliers }/>
                             <span className="menu-text">
                                 Suppliers
@@ -120,11 +126,11 @@ function Add_supplier(){
         </div>
 
 
-        <div className="col-md-9 supplier-container" style={{ paddingTop: '20px', display: 'flex', flexWrap: 'wrap' }}>
+        <div className="col-md-9 supplier-container" style={{ paddingTop: '10px', display: 'flex', flexFlow:'column'}}>
             {filteredSuppliers.map((supplier) => (
-                <div className="col-md-3 suppliers-profile-container" key={supplier.id} style={{ backgroundColor: 'white', height: '330px', borderStyle: 'none', borderRadius: '20px' }}>
+                <div className="col-md-12 suppliers-profile-container" key={supplier.id} style={{ backgroundColor:'white', height:'50px', display:'flex', flexFlow:'row', alignItems:'center', justifyContent:'space-around'}}>
                 <div className="profile-pic-container" style={{ padding: '20px' }}>
-                    <img className="mx-auto d-block" src={`https://localhost:7017/${supplier.image}`} alt={supplier.shopName} style={{ height: '120px', width: '120px', borderStyle: 'none', borderRadius: '50%' }} />
+                    <img className="mx-auto d-block" src={`https://localhost:7017/${supplier.image}`} alt={supplier.shopName} style={{ height: '20px', width: '20px', borderStyle: 'none', borderRadius: "50%" }} />
                 </div>
                 <span className="supplier-details">Supplier ID: {supplier.id}</span>
                 <span className="supplier-details">Shop: {supplier.shopName}</span>

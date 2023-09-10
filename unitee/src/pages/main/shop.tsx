@@ -95,14 +95,14 @@ function Shop() {
     };
 
     // When clicking it will be checked
-    const handleSizeButtonClick = (size) => {
-        setSelectedSizes(size === selectedSizes ? null : size);
+    // const handleSizeButtonClick = (size) => {
+    //     setSelectedSizes(size === selectedSizes ? null : size);
 
-        setSelectedProduct(prevSelectedProduct => ({
-            ...prevSelectedProduct,
-            selectedSizes: size
-        }));
-    };
+    //     setSelectedProduct(prevSelectedProduct => ({
+    //         ...prevSelectedProduct,
+    //         selectedSizes: size
+    //     }));
+    // };
 
     // Decrease quantity
     const handleDecrement = () => {
@@ -153,7 +153,6 @@ function Shop() {
             await axios.post('https://localhost:7017/Cart/add', cartAddRequest);
             toast.success("Item added to cart");
 
-            // Fetch updated cart data and update state
             const updatedCartResponse = await axios.get('https://localhost:7017/Cart');
             setCart(updatedCartResponse.data);
         } catch (error) {
@@ -299,7 +298,7 @@ function Shop() {
                                         </div>
                                         <h2 style={{ fontSize: '20px', marginTop: '10px' }}>Sizes Available:</h2> 
                                         <div className='sizes-container'>
-                                        {selectedProduct.sizes.split(',').map((size, index) => (
+                                        {/* {selectedProduct.sizes.split(',').map((size, index) => (
                                             <button
                                                 key={index}
                                                 className={`size-button ${size === selectedSizes ? 'selected' : ''}`}
@@ -307,7 +306,7 @@ function Shop() {
                                                 >
                                                 {size}
                                             </button>
-                                        ))}
+                                        ))} */}
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +339,7 @@ function Shop() {
                             <span className="stocks-size">Stocks: {selectedProduct.stocks}</span>
                             <span className='sizes-shop'>Sizes:</span>
                             <div className='sizes-container-shop'>
-                            {selectedProduct.sizes.split(',').map((size, index) => (
+                            {/* {selectedProduct.sizes.split(',').map((size, index) => (
                                 <button
                                     key={index}
                                     className={`size-button ${size === selectedSizes ? 'selected' : ''}`}
@@ -348,7 +347,7 @@ function Shop() {
                                     >
                                     {size}
                                 </button>
-                            ))}
+                            ))} */}
                             </div>
                             <div className='quantity-container'>
                                 <button type='button' onClick={handleDecrement} className='input-group-text' id='minus'>-</button>
