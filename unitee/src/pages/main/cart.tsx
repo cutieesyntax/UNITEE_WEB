@@ -4,12 +4,44 @@ import paymaya from "../../assets/images/shop_products/paymaya.png"
 import box from "../../assets/images/shop_products/placeOrder.png"
 import remove from "../../assets/images/icons/trash.png"
 import './cart.css'
+import toast, { Toaster } from 'react-hot-toast';
+
+
+export const showToast = (message: string, type: number) => {
+  if(type === 1) {
+    toast.success(message, {
+      style: {
+        border: '1px solid #020654',
+        padding: '16px',
+        color: '#020654',
+      },
+      iconTheme: {
+        primary: '#020654',
+        secondary: '#FFFAEE',
+      },
+    });
+  }
+  else if(type === 2)
+    toast(message, {
+      icon: '👏',
+    });
+  else
+    toast.error(message)
+
+}
 
 function Cart () {
     return <div className="cart-container row">
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+      />
         <div className="col-md-7 cart-title-container">
         <h1 className="cart-title">Your Cart</h1>
-            <div className="cart-remove-btn-container"><button type="button" className="btn btn-outline-primary"><img style={{ width:'20%', marginRight:'5px'}} src={ remove }/>Remove</button></div>
+            <div className="cart-remove-btn-container">
+              <button type="button" className="btn btn-outline-primary" onClick={() => showToast('Item removed.', 1)}>
+                <img style={{ width:'20%', marginRight:'5px'}} src={ remove }/>Remove
+              </button></div>
         </div>
         <div className='col-md-7 cart-table-wrapper table-responsive-sm' style={{ marginTop:'20px'}}>
         <table className="table table-hover align-middle caption-top table-xl">
@@ -118,7 +150,7 @@ function Cart () {
    
 
         <div className="cart-modal modal fade" id="cartProductModal" tabIndex={-1} aria-labelledby="cartProductModalLabel" aria-hidden="true">
-  <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+  <div className="modal-dialog modal-lg modal-dialog-centered">
     <div className="modal-content" style={{ backgroundColor:'#fff' }}>
       
       <div className='col-md-12 row'>
@@ -172,11 +204,11 @@ function Cart () {
                         </form>
             </div>
 
-            <div>
-            <span>Quantity: </span>
-            <input type="number" className='quantity-input' style={{ color:'black', width:'70px', marginLeft:'10px' }}/>
-            </div>
-            <span className='stocks-per-size'>9900 pieces available</span>
+              <div>
+                <span>Quantity: </span>
+                <input type="number" className='quantity-input' style={{ color:'black', width:'70px', marginLeft:'10px' }}/>
+              </div>
+              <span className='stocks-per-size'>9900 pieces available</span>
 
             </div>
         </div>
@@ -216,58 +248,41 @@ function Cart () {
 
 
                 <div className="account-details-container">
-                <div className="account-details">
-                    <span className="details">PayMaya:</span>
-                    <span className="acc-number">09151638815</span>
-                </div>
-                <div className="account-details">
-                    <span className="details">GCash:</span>
-                    <span className="acc-number">09151638815</span>
-                </div>
-                <div className="account-details">
-                    <span className="details">Walk-in:</span>
-                    <span className="acc-number"> UCLM Cashier</span>
-                </div>
+                  <div className="account-details">
+                      <span className="details">PayMaya:</span>
+                      <span className="acc-number">09151638815</span>
+                  </div>
+                  <div className="account-details">
+                      <span className="details">GCash:</span>
+                      <span className="acc-number">09151638815</span>
+                  </div>
+                  <div className="account-details">
+                      <span className="details">Walk-in:</span>
+                      <span className="acc-number"> UCLM Cashier</span>
+                  </div>
                 </div>
 
-                <div className="amount-details">
-                <h2 className="total-amount-text">Total amount:</h2>
-                <span className="total-amount-num">PHP 1000</span>
-                {/* <h2 className="total-amount-text">Upload Proof of Payment:</h2>
-            <input type="file" className="proof-payment-img" accept="image/png, image/gif, image/jpeg" style={{ color:'white' }}/> */}
-                </div>
+                  <div className="amount-details">
+                    <h2 className="total-amount-text">Total amount:</h2>
+                    <span className="total-amount-num">PHP 1000</span>
+                  {/* <h2 className="total-amount-text">Upload Proof of Payment:</h2>
+              <input type="file" className="proof-payment-img" accept="image/png, image/gif, image/jpeg" style={{ color:'white' }}/> */}
+                  </div>
                 </div>
 
                 <div className="box-container-img">
                     <div className="col-md-12 btn-container">
-                    <button className="place-order">
-                    <span className="circle" aria-hidden="true">
-                    <span className="icon arrow"></span>
-                    </span>
-                    <span className="place-button-text" data-bs-toggle="modal" data-bs-target="#placeOrderModal">Place Order</span>
-                    </button>
-                    <img className="box "  src={ box }/>
+                      <button className="place-order">
+                        <span className="circle" aria-hidden="true">
+                        <span className="icon arrow"></span>
+                        </span>
+                        <span className="place-button-text" onClick={() => showToast('Successfully Placed Order!', 1)}>Place Order</span>
+                      </button>
+                      <img className="box "  src={ box }/>
                     </div>
-                    
                 </div>
             </div>
         </div>
-
-<div className="modal fade" id="placeOrderModal" tabIndex={-1} aria-labelledby="placeOrderModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        <p className="place-order-message">Successfully placed order! You can check your order status on the "Orders" page.</p>
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
     </div>
 }
 

@@ -236,3 +236,15 @@ button {
     width: 100%;
     max-width: 350px;
    }
+
+
+   @media only screen and (max-width: 600px) {
+    .box-container-img {
+        width: 100%;
+    max-width: 600px;
+    align-items: start;
+    display: flex;
+    justify-content: start;
+    }
+  }
+
