@@ -4,7 +4,6 @@
 
 .header-button-container {
     display: flex;
-    gap: 20px;
     align-items: center;
     justify-content: end;
 }
@@ -15,7 +14,8 @@
 }
 
 .logo {
-    height: 40px;
+    height: 60px;
+    cursor: pointer;
 }
 
 .footer-info {
@@ -26,14 +26,14 @@
 
 .footer-terms-privacy {
     display: flex;
-    gap: 10px;
+    justify-content: end;
+    gap: 20px;
 }
 
 .footer{
-    background-color: #457497;
-    position:static;
+    position:-ms-page;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
     text-align: center;
 }
 
@@ -41,4 +41,26 @@
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+.nav-btn {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    margin-right: 60px;
+}
+.customer-nav-link, .customer-nav-droplink {
+    margin: 10px;
+    text-decoration: none;
+}
+
+.customer-nav-link :hover{
+    color: #FFAA00;
+    text-decoration: none;
+}
+
+
+.dropdown-icon {
+    width: 8%;
+    margin: 0px 10px 0px 20px;
 }

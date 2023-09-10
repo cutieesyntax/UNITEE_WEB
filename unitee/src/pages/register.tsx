@@ -2,6 +2,7 @@ import './register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import React, { useState } from 'react'
+import cat from "../../src/assets/images/cat.png"
 
 
 function Register() {Register
@@ -74,9 +75,9 @@ function Register() {Register
 
     return (
             <div className='container main-container row'>
-                <div className="col content-container">
+                <div className="col input-content-container">
                     <div className='row g-3' style={{ justifyContent: 'center' }}>
-                        <h3 className='col-md-12 header-title'>Register</h3>
+                        <h1 className='col-md-12 header-title'>Create an account</h1>
                         <div className='col-md-6'>
                             <input className="form-control input" placeholder="ID Number" onChange={(e) => handleIDNumber(e.target.value)} />
                         </div>
@@ -96,7 +97,8 @@ function Register() {Register
                             <input className="form-control input" type='password' placeholder="Password" onChange={(e) => handlePassword(e.target.value)} />
                         </div>
                         <div className='col-md-6' >
-                            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
+                            <span className='span-text'>Department:</span>
+                            <select className="form-select select" style={{ marginTop:'5px' }}>
                             <option value="1">Senior High School</option>
                             <option value="2">Elementary and Junior High School</option>
                             <option value="3">Criminology</option>
@@ -114,34 +116,41 @@ function Register() {Register
                         <div className='col-md-6'>
                             <input className="form-control input" type='password' placeholder="Confirm Password"/>
                         </div>
-                        <div className='col-md-12' style={{ marginTop: '20px' }}>
-                            <span>Gender:</span>
-                            <div className="form-check">
-                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Male" checked={gender === 'Male'} onChange={(e) => handleGender(e.target.value)} />
-                                <label className="form-check-label">
-                                    Male
-                                </label>
-                            </div>
-                            <div className="form-check">
-                                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Female" checked={gender === 'Female'} onChange={(e) => handleGender(e.target.value)} />
-                                <label className="form-check-label">
-                                    Female
-                                </label>
-                            </div>
+                        <div className='col-md-12'>
+                        <div className='col-md-1 signup-gender-container'>
+                            <span className='span-text'>Gender:</span>
+                        <div className="col-md-4 container" style={{ marginTop:'5px' }}>
+                        <form>
+                            <label>
+                                <input type="radio" name="radio"/>
+                                <span>Male</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="radio"/>
+                                <span>Female</span>
+                            </label>
+                        </form>
+                    </div>
                         </div>
-                        <Link className='col-md-6 link' to='/' style={{ padding: '0px' }}>
-                            <button className="col-md-12 btn btn-primary button" onClick={() => handleSave()}>REGISTER</button>
+                        </div>
+                        <Link className='col-md-9 link' to='/' style={{ padding: '0px', display:'flex', justifyContent:'center' }}>
+                            <button className="col-md-5 btn btn-primary button" onClick={() => handleSave()}>Sign up</button>
                         </Link>
                     </div>
                 </div>
-                <div className="col row g-3 content-container" style={{ marginTop: '-200px' }}>
-                    <h3 className='col-md-12 header-title'>Existing User?</h3>
-                    <span className='col-md-12' style={{ textAlign: 'center' }}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
-                    </span>
+                <div className="col row g-3 content-container" style={{ marginTop: '-90px'}}>
+                    <h3 className='col-md-6 header-title'>Existing User?</h3>
+                    <img src={ cat } style={{ width:'100%', maxWidth:'300px' }}/>
+                    <div className='col-md-6' style={{ display:'flex', justifyContent:'center' }}>
                     <Link className='col-md-4' to='/'>
-                        <button className="col-md-12 btn btn-light button">LOGIN</button>
+                    <button className="learn-more">
+                    <span className="circle" aria-hidden="true">
+                    <span className="Regicon arrow"></span>
+                    </span>
+                    <span className="button-text">Sign In</span>
+                    </button>
                     </Link>
+                    </div>
                 </div>
 
             </div>

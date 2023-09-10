@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
 :root {
-  --theme: #00171F;
+  --theme: black;
   font-family: 'Poppins', sans-serif;
 }
 
 * {
-  color: white;
+  color: black;
   font-size: 12px;
 
 }
 
 .bg {
-  background: #00171F;
+  background: white;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -34,5 +34,5 @@
 }
 
 span {
-  color: white;
+  color: black;
 }

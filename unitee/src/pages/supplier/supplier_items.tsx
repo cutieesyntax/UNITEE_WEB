@@ -11,19 +11,19 @@ import product from "../../assets/images/shop_products/product.png"
 
 function Supplier (){
     return (
-        <div className="supplier-container">
+        <div className="supplier-container row">
             <header className="supplier-header row">
                 <Link to='' className="col-md-3">
-                    <img className="logo" src={ logo } style={{height:'60px', marginLeft:'50px'}}/>
+                    <img className="Supplierlogo" src={ logo } style={{height:'60px', marginLeft:'50px'}}/>
                 </Link>
-                <p className='col'>ITEMS</p>
+                <p className='supplier-items-title col'>ITEMS</p>
                 <Link to='' className="col-md-1">
                     <img className="sprofile" src={ sprofile } style={{height:'40px'}}/>
                 </Link>
             </header>
 
         <div className="items-container">
-            <div className="menu-button-container">
+            <div className="supplier-menu-button-container">
                     <Link to='' className="menu-link">
                         <img className="iconSupplier" src={ items }/>
                             <span className="menu-text">
@@ -67,80 +67,71 @@ function Supplier (){
             <div className='container shop-contianer'>
         <div className='col content-container'>
         <div className='row g-3' style={{ justifyContent: 'center' }}>
-            <p className='items-title' style={{ marginTop:'100px', fontWeight:'400' }}>AVAILABLE ITEMS</p>           
-            <h4 className='col-md-9' style={{ paddingLeft:'60px' }}>Sort by:</h4>
-            <div className='col-md-4 department-select'>
-            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
-                <option value="1">Senior High School</option>
-                <option value="2">Elementary and Junior High School</option>
-                <option value="3">Criminology</option>
-                <option value="4">Nursing</option>
-                <option value="5">Allied Engineering</option>
-                <option value="6">Customs Management</option>
-                <option value="7">Computer Studies</option>
-                <option value="8">Marine Transportation</option>
-                <option value="9">Teacher Education</option>
-                <option value="10">Marine Engineering</option>
-                <option value="11">Computer Studies</option>
-                <option value="12">Hotel and Tourism Management</option>                
-            </select>
-            </div>
+        <div className="supplier-sort-container">
+            <div className='supplier-filter-container'>
 
-            <div className='col-md-4 gender-filter-container' style={{alignItems:'center', display:'flex'}}>
-            <h3 style={{ paddingRight:'10px' }}>Gender:</h3>
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked/>
+            <div className="sort-container">
+                <h4>Sort by:</h4>
+                <div className='gender-container-shop'>
+                <div className="form-check">
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
                     <label className="form-check-label">
-                        Male
+                    Male
                     </label>
-                </div>
-
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-                    <label className="form-check-label">
-                        Female
-                    </label>
-                </div>               
-                <div className="form-check-shop">
-                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked/>
-                    <label className="form-check-label">
-                        Unisex
-                    </label>
-                </div>
-                </div>
-                
-                <div className='col-md-12' style={{ marginTop:'50px',justifyContent:'center',display:'flex',alignItems:'center'}}>
-                    <div>
-                      <Link to='/add_item'>
-                        <button className="add-item-btn">Add Item</button>
-                      </Link>
                     </div>
-                    <div className='col-md-6'>
-                    <input className="form-control input" placeholder="Search" />
-                    
-                    </div>                
+
+                    <div className="form-check">
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                    <label className="form-check-label">
+                    Female
+                    </label>
+                    </div>
+
+                    <div className="form-check">
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+                    <label className="form-check-label">
+                    Unisex
+                    </label>
                 </div>
+
+                    <select className="form-select" style={{ width:'200px' }}>
+                        <option value="1">School Uniform</option>
+                        <option value="2">Department Shirt</option>
+                        <option value="3">Event Shirt</option>
+                        <option value="4">Accessories</option>
+                        <option value="5">ID Sling</option>
+                    </select>
+                    <form className="d-flex" role="search">
+                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button className="btn btn-outline-primary" type="submit">Search</button>
+                    </form>
+                </div>
+                <div style={{ marginLeft:'20px' }}>
+                      <Link to='/add_item'>
+                        <button className="btn btn-primary">Add Item</button>
+                      </Link>
+                    </div>  
+            </div>
+            
+            </div>
+        </div>
 
 
 <Link to="/update_item" style={{ display:'flex', justifyContent:'center', textDecoration:'none' }}>
-<div className="card mb-3" style={{maxWidth: '900px',backgroundColor:'transparent', borderStyle:'none', marginTop:'30px'}}>
-  <div className="row g-0">
-    <div className="col-md-4">
-      <img src={ product } className="img-fluid rounded-start" alt="..."/>
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <span className="card-title-supplier">PRODUCT NAME</span>
-        <p className="size-available">Sizes available: </p>
-        <p className="prod-gender">Gender: </p>
-        <p className="prod-department">Department: </p>
-        <p className="prod-type">Product type: </p>
-        <p className="prod-stock">Stocks available: </p>
-        <span></span>
-        <p className="prod-price">Price: </p>
-      </div>
-    </div>
-  </div>
+        <div className='product-card-supplier'>
+            <img className='sup-product-image object-fit-cover border rounded' src={ product }/>
+            <div>
+                <p className='product-text'>Product Name</p>
+            </div>
+
+</div>
+
+<div className='product-card-supplier'>
+            <img className='sup-product-image object-fit-cover border rounded' src={ product }/>
+            <div>
+                <p className='product-text'>Product Name</p>
+            </div>
+
 </div>
 </Link>
             

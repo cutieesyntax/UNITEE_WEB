@@ -7,10 +7,14 @@
     padding-bottom: 50px;
 }
 
-.display-img {
-    width: 833px;
-    height: 470px;
+.carousel-item {
+    width: 800px;
 }
+
+.carousel-caption-text {
+    color: white;
+}
+
 .goto-shop-container {
     position: absolute;
     display: flex;
@@ -18,4 +22,23 @@
     align-items: center;
     justify-content: center;
     gap: 40px;
+}
+
+.home-motto {
+    font-size: 50px;
+    font-weight: 600;
+    color: #FFAA00;
+}
+
+.home-motto-2 {
+    font-size: 100px;
+    font-weight: 600;
+    color: #020654;
+}
+
+.model-img {
+    width: 100%;
+    max-width: 350px;
+    height: 100%;
+    max-height: 500px;
 }

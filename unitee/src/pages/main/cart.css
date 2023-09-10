@@ -1,0 +1,238 @@
+.cart-title {
+    color: #020654;
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+.cart-remove-btn-container {
+    margin-top: 30px;
+}
+
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.cart-table-wrapper {
+    overflow: auto;
+    display:inline-block;
+    margin-bottom: 40px;
+  }
+
+.payment-option {
+    width: 40px;
+    border-style: none;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.payment-option-container {
+    display: flex;
+    flex-flow: row;
+    gap: 30px;
+    margin-top: 5px;
+    margin-bottom: 40px;
+}
+
+.upload-proof-btn {
+    color: white;
+    cursor: pointer;
+}
+
+.cart-check-label {
+    color: white;
+    margin-top: 5px;
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+.payment-option-radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.labelProofPayment {
+    cursor: pointer;
+}
+
+.summary-container {
+    background-color: #020654;
+    border-style: none;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    height: 550px;
+}
+
+.total-amount-text {
+    color: #FFAA00;
+    margin-top: 20px;
+}
+
+.total-amount-num {
+    color: white;
+    font-size: 20px;
+}
+
+.details {
+    color: #FFAA00;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.account-details {
+    padding: 5px;
+}
+
+.payment-option-sub {
+    color: #FFAA00;
+    font-size: 15px;
+}
+
+.acc-number {
+    color: white;
+    font-size: 15px;
+}
+
+.summary-title {
+    color: #FFAA00;
+    margin-bottom: 20px;
+}
+
+.box {
+    width: 65%;
+    max-width: 300px;
+}
+
+.box-container-img {
+    width: 100%;
+    max-width: 500px;
+    align-items: start;
+    display: flex;
+    justify-content: start;
+}
+
+.summary-details-container {
+    margin-left: 20px;
+}
+
+.btn-container {
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 200px;
+}
+
+.prod-image-cart {
+    width: 100%;
+    max-width: 90px;
+}
+
+.cart-table-header {
+    font-size: 15px;
+}
+
+button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+   }
+   
+   button.place-order {
+    width: 12rem;
+    height: auto;
+   }
+   
+   button.place-order .circle {
+    transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #FFAA00;
+    border-radius: 1.625rem;
+   }
+   
+   button.place-order .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+   }
+   
+   button.place-order .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+   }
+   
+   button.place-order .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #020654;
+    border-right: 0.125rem solid #020654;
+    transform: rotate(45deg);
+   }
+   
+   button.place-order .place-button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #FFAA00;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+   }
+   
+   button:hover .circle {
+    width: 100%;
+   }
+   
+   button:hover .circle .icon.arrow {
+    background: #020654;
+    transform: translate(1rem, 0);
+   }
+   
+   button:hover .place-button-text {
+    color: #020654;
+   }
+
+   .cart-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   }
+
+   .cart-prod-image {
+    width: 100%;
+    max-width: 350px;
+   }

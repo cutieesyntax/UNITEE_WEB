@@ -16,18 +16,22 @@ function Add_item(){
             <div>
                 <img src={ product } style={{ width:'350px' }} />
             </div>
-        <div className="col-md-4 item_deatils_container">           
-        <div className="col-md-12 price-container">
-                <p className="col-md-3 item-price">Product Name:</p>
-                <input className="form-control input" style={{ width:'28em' }}/>
+        <div className="col-md-3 item_deatils_container">           
+
+            <div className="mb-3">
+                <label className="productName-label">Product Name</label>
+                <input type="email" className="form-control" id="productName" placeholder="Product Name"/>
             </div>
-            <div className="input-group-description">
+
+            <div className="mb-3">
+                <label className="prodDescription-label">Description</label>
                 <textarea className="form-control" aria-label="Product description" placeholder="Enter product description"/>
             </div>
 
+
             <div className='col-md-9 department-select' style={{ display:'flex', gap:'20px' }}>
                 <p className="department-item">Department:</p>
-            <select className="form-select select" style={{ backgroundColor:'#00215E', color:'white' }}>
+            <select className="form-select" style={{ width:'220px' }}>
                 <option value="1">Senior High School</option>
                 <option value="2">Elementary and Junior High School</option>
                 <option value="3">Criminology</option>
@@ -45,49 +49,49 @@ function Add_item(){
 
             <div className="col-md-12 price-container">
                 <p className="col-md-3 item-price">Enter price:</p>
-                <input className="form-control input" style={{ width:'28em' }}/>
+                <input className="form-control" type='number' style={{ width:'28em' }}/>
             </div>
 
             <div className="size-container">
                 <p className="available-sizes">Sizes Available:</p>
-                <div className="item-sizes-container" style={{ display:'flex', marginLeft:'20px' }}>
+                <div className="item-sizes-container" style={{ display:'flex' }}>
                     <div className="form-check-shop">
-                        <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" value="S"/>
+                        <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox" value="S"/>
                         <label className="form-check-label">
                             S
                         </label>
                     </div>
 
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault2" value="M"/>
+                            <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox2" value="M"/>
                             <label className="form-check-label">
                                 M
                             </label>
                         </div>
 
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault3" value="L"/>
+                            <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox3" value="L"/>
                             <label className="form-check-label">
                                 L
                             </label>
                         </div>
 
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault4" value="XL"/>
+                            <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox4" value="XL"/>
                             <label className="form-check-label">
                                 XL
                             </label>
                         </div>
 
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault5" value="2XL"/>
+                            <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox5" value="2XL"/>
                             <label className="form-check-label">
                                 2XL
                             </label>
                         </div>
 
                         <div className="form-check-shop">
-                            <input className="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault6" value="3XL"/>
+                            <input className="form-check-input" type="checkbox" name="sizes-checkbox" id="sizeCheckBox6" value="3XL"/>
                             <label className="form-check-label">
                                 3XL
                             </label>

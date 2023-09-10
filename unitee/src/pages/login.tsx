@@ -2,6 +2,8 @@ import { Link, useNavigate} from 'react-router-dom'
 import './login.css'
 import React, { useState } from 'react'
 import axios from 'axios';
+import background from "../../src/assets/images/campus.png"
+import logo from "../../src/assets/images/unitee.png"
 
 function Login() {
 
@@ -41,25 +43,26 @@ function Login() {
     }
 
     return (
-        <div className='row container main-container'>
-            <div className="col content-container" style={{ marginTop: '-200px' }}>
-                <div className='row side-container'>
-                    <h3 className='col-md-12 header-title'>New here?</h3>
-                    <span className='col-md-12' style={{ textAlign: 'center' }}>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
-                    </span>
-                    <Link className='col-md-4 link' to='/register'>
-                        <button className="col-md-12 btn btn-light button">SIGN UP</button>
-                    </Link>
-                </div>
-            </div>
-            <div className="col content-container">
+        <div className='container main-container'>
+
+            <div className="content-container">
                 <div className='row login-container'>
-                    <h3 className='col-md-12 header-title'>Log In</h3>
+                   
+                    <img src={ logo } style={{ marginBottom:'40px' }}/>
                     <input className="col-md-12 form-control input" placeholder="ID Number" onChange={(e) => handleIDNumber(e.target.value)} />
                     <input className="col-md-12 form-control input" type='password' placeholder="Password" onChange={(e) => handlePassword(e.target.value)} />
-                    <Link className='col-md-12 link' to='/main' style={{ padding: '0' }}>
-                        <button className="col-md-12 btn btn-primary button" onClick={() => handleLogin()} >LOGIN</button>
+                    <Link className='col-md-12 link' to='/main' style={{ padding: '0', marginTop:'20px' }}>
+                        <button className="col-md-12 btn btn-primary button" onClick={() => handleLogin()} >Sign In</button>
+                    </Link>
+
+                    <Link className='col-md-12 signUp-link' to='/register'>
+                        <div className='create-acc'>
+                     <div style={{ display:'flex'}}>
+                     <span className='signup-span' style={{ textDecoration:'none' }}>Don't have an account?</span>
+                      <span className='signup-btn-span'>Sign Up</span>
+                     </div>
+                        
+                        </div>
                     </Link>
                 </div>
             </div>
